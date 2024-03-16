@@ -11,8 +11,8 @@ import Product from "./pages/Product";
 function App() {
   return (
     <div className="App">
-      <ContextApiProvider>
-        <Router>
+      <Router>
+        <ContextApiProvider>
           <Header />
           <Routes>
             <Route exact path="/" element={<Homepage />} />
@@ -21,8 +21,8 @@ function App() {
             <Route path="/product/:id" element={<Product />} />
           </Routes>
           <Footer />
-        </Router>
-      </ContextApiProvider>
+        </ContextApiProvider>
+      </Router>
     </div>
   );
 }

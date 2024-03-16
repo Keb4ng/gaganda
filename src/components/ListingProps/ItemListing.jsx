@@ -1,4 +1,5 @@
 import React from "react";
+
 const ItemListing = ({
   itemImg,
   itemName,
@@ -12,7 +13,7 @@ const ItemListing = ({
       <div className="bg-white shadow-md w-full h-full flex flex-col text-[16px] ">
         <div className="w-full min-h-[270px] rounded-t-lg">
           <img
-            className="w-full h-[300px] object-contain rounded-t-lg"
+            className="w-full h-[300px] object-cover rounded-t-lg"
             src={itemImg}
             alt=""
           />
