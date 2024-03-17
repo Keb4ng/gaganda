@@ -2,11 +2,84 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useApiContext } from "../context/DataContext/ContextApi";
 import { TiHeartFullOutline } from "react-icons/ti";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { Link } from "react-router-dom";
+import ItemListing from "../components/ListingProps/ItemListing";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
 const Product = () => {
   let { id } = useParams();
-  const { items } = useApiContext();
+  const { items, dataStatus } = useApiContext();
   const product = items.find((product) => String(product.id) === id);
+
+  function NextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <MdOutlineKeyboardArrowRight
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          color: "black",
+          width: "30px",
+          height: "30px",
+          right: "10px",
+          zIndex: "20",
+        }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function PrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <MdOutlineKeyboardArrowLeft
+        className={className}
+        style={{
+          ...style,
+          display: "block",
+          color: "black",
+          width: "30px",
+          height: "30px",
+          left: "10px",
+          zIndex: "20",
+        }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <div className="max-w-[1200px] mx-auto mt-[94px]">
@@ -14,22 +87,22 @@ const Product = () => {
         <div className="w-full h-auto flex justify-center items-center">
           <img
             className="w-full h-full object-contain max-h-[600px]"
-            src={product.api_featured_image}
+            src={product?.api_featured_image}
             alt=""
           />
         </div>
         <div className="flex flex-col gap-3 justify-center">
           <div>
             <p className="text-[22px] font-bold text-slate-950">
-              {product.name}
+              {product?.name}
             </p>
-            <p className="text-[16px] text-gray-500">{product.product_type}</p>
+            <p className="text-[16px] text-gray-500">{product?.product_type}</p>
             <p className="text-[16px] text-slate-950 font-bold">
-              {product.price_sign}
-              {product.price}
+              {product?.price_sign}
+              {product?.price}
             </p>
             <p className="text-[14px] text-gray-500 my-5">
-              {product.description}
+              {product?.description}
             </p>
           </div>
           <div className="flex justify-center md:justify-normal w-auto gap-5">
@@ -42,12 +115,34 @@ const Product = () => {
           </div>
         </div>
       </div>
-      <div className="test grid grid-cols-4 gap-2">
-        <div className="bg-red-400 w-[300px] h-[200px]"></div>
-        <div className="bg-green-400 w-[300px] h-[200px]"></div>
-        <div className="bg-red-400 w-[300px] h-[200px]"></div>
-        <div className="bg-green-400 w-[300px] h-[200px]"></div>
-        <div className="bg-red-400 w-[300px] h-[200px]"></div>
+      <div className="max-w-[1200px] mx-auto px-2">
+        <h1 class="text-center text-xl my-5">Similar Items</h1>
+        {dataStatus ? (
+          <Slider {...settings}>
+            {items &&
+              items
+                .filter((products) => {
+                  return products.brand === product.brand;
+                })
+                .slice(0, 4)
+                .map((product) => {
+                  return (
+                    <Link key={product.id} to={`/product/${product.id}`}>
+                      <ItemListing
+                        itemImg={product.api_featured_image}
+                        itemName={product.name}
+                        itemBrand={product.brand}
+                        itemPrice={product.price}
+                        itemPriceSign={product.price_sign}
+                        productType={product.product_type}
+                      />
+                    </Link>
+                  );
+                })}
+          </Slider>
+        ) : (
+          "Loading..."
+        )}
       </div>
     </div>
   );

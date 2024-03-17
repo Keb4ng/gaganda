@@ -70,11 +70,14 @@ const Header = () => {
               type="text"
               placeholder="Enter Search..."
             />
-            <HiMiniMagnifyingGlass
-              className="cursor-pointer"
-              size={25}
-              onClick={searchButton}
-            />
+            <div className="flex flex-row gap-2">
+              <HiMiniMagnifyingGlass
+                className="cursor-pointer"
+                size={25}
+                onClick={searchButton}
+              />
+              <IoMdClose onClick={() => setSearch()} size={25} />
+            </div>
           </div>
         </div>
       ) : (
