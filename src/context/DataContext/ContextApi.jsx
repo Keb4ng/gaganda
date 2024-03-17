@@ -56,7 +56,6 @@ export const ContextApiProvider = ({ children }) => {
 
   const handleSearch = (e) => {
     setSearchData(e.target.value);
-    console.log(searchData);
   };
 
   const searchButton = () => {
@@ -67,6 +66,22 @@ export const ContextApiProvider = ({ children }) => {
     navigate("/shop");
   };
 
+  const sortAsc = () => {
+    const sortedItems = filteredItems.sort((a, b) =>
+      a.name - b.name ? 1 : -1
+    );
+    setFilteredItems(sortedItems);
+    console.log(sortedItems);
+  };
+
+  const sortDesc = () => {
+    const sortedItems = filteredItems.sort((a, b) =>
+      a.price - b.price ? 1 : -1
+    );
+    setFilteredItems(sortedItems);
+    console.log(sortedItems);
+  };
+
   useEffect(() => {
     if (dataStatus === "success") {
       setItems(data);
@@ -74,13 +89,6 @@ export const ContextApiProvider = ({ children }) => {
       console.log(data);
     }
   }, [dataStatus, data]);
-
-  if (error) {
-    <p>Error Loading data</p>;
-  }
-  if (isLoading) {
-    <p>Loading data...</p>;
-  }
 
   return (
     <ApiContext.Provider
@@ -100,6 +108,8 @@ export const ContextApiProvider = ({ children }) => {
         dataStatus,
         cart,
         setCart,
+        sortAsc,
+        sortDesc,
       }}>
       {children}
     </ApiContext.Provider>

@@ -7,9 +7,10 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { LuLoader2 } from "react-icons/lu";
 
 const Featured = () => {
-  const { items } = useApiContext();
+  const { items, isLoading } = useApiContext();
 
   function NextArrow(props) {
     const { className, style, onClick } = props;
@@ -80,27 +81,33 @@ const Featured = () => {
   return (
     <div className="max-w-[1200px] mx-auto my-5 h-auto flex flex-col">
       <h1 className="text-center text-[24px] my-5">New Arrivals</h1>
-      <Slider {...settings}>
-        {items
-          .filter((product) => {
-            return product.brand === "marienatie";
-          })
-          .slice(0, 12)
-          .map((product) => {
-            return (
-              <Link key={product.id} to={`/product/${product.id}`}>
-                <ItemListing
-                  itemImg={product.api_featured_image}
-                  itemName={product.name}
-                  itemBrand={product.brand}
-                  itemPrice={product.price}
-                  itemPriceSign={product.price_sign}
-                  productType={product.product_type}
-                />
-              </Link>
-            );
-          })}
-      </Slider>
+      {isLoading ? (
+        <div className="w-full h-auto flex items-center justify-center">
+          <LuLoader2 className="animate-spin" size={50} />
+        </div>
+      ) : (
+        <Slider {...settings}>
+          {items
+            .filter((product) => {
+              return product.brand === "marienatie";
+            })
+            .slice(0, 12)
+            .map((product) => {
+              return (
+                <Link key={product.id} to={`/product/${product.id}`}>
+                  <ItemListing
+                    itemImg={product.api_featured_image}
+                    itemName={product.name}
+                    itemBrand={product.brand}
+                    itemPrice={product.price}
+                    itemPriceSign={product.price_sign}
+                    productType={product.product_type}
+                  />
+                </Link>
+              );
+            })}
+        </Slider>
+      )}
     </div>
   );
 };
