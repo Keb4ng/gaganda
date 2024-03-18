@@ -14,6 +14,7 @@ export const ContextApiProvider = ({ children }) => {
   const [cart, setCart] = useState(false);
   const [loggedIn, setLoggedIn] = useState(true);
   const [productMsg, setProductMsg] = useState(false);
+  const [checkOutMsg, setCheckOutMsg] = useState(false);
   const navigate = useNavigate();
 
   // cart functions
@@ -41,6 +42,11 @@ export const ContextApiProvider = ({ children }) => {
     const count = cartItems[itemId] || 0;
     setCartItems((prev) => ({ ...prev, [itemId]: count + 1 }));
     setProductMsg(!productMsg);
+  };
+
+  const checkOut = () => {
+    setCheckOutMsg(!checkOutMsg);
+    setCartItems(getDefaultCart(0));
   };
   // query / other buttons functions
 
@@ -152,6 +158,10 @@ export const ContextApiProvider = ({ children }) => {
         handleAddtoCart,
         productMsg,
         setProductMsg,
+        getDefaultCart,
+        checkOut,
+        checkOutMsg,
+        setCheckOutMsg,
       }}>
       {children}
     </ApiContext.Provider>

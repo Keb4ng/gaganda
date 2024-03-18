@@ -2,9 +2,18 @@ import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useApiContext } from "../../context/DataContext/ContextApi";
 import CartProps from "./CartProps";
+import { MdClose } from "react-icons/md";
 
 const Cart = () => {
-  const { cart, setCart, cartItems, items } = useApiContext();
+  const {
+    cart,
+    setCart,
+    cartItems,
+    items,
+    checkOut,
+    checkOutMsg,
+    setCheckOutMsg,
+  } = useApiContext();
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
@@ -42,15 +51,48 @@ const Cart = () => {
               }
             })}
           </div>
-          <div className="border-t-2 border-gray-300 px-2 py-2 flex flex-col gap-3 mt-5">
-            <div className="flex flex-row items-center justify-between">
-              <p>SUBTOTAL: ${totalAmount}</p>
+          {totalAmount ? (
+            <div className="border-t-2 border-gray-300 px-2 py-2 flex flex-col gap-3 mt-5">
+              <div className="flex flex-row items-center justify-between">
+                <p>SUBTOTAL: ${totalAmount}</p>
+              </div>
+              <button
+                onClick={() => checkOut()}
+                className="bg-primary-200 w-full rounded-lg text-white px-2 py-3 hover:bg-white hover:text-primary-200 duration-200 border-2 hover:border-primary-200">
+                Check Out
+              </button>
             </div>
-            <button className="bg-primary-200 w-full rounded-lg text-white px-2 py-3 hover:bg-white hover:text-primary-200 duration-200 border-2 hover:border-primary-200">
-              Check Out
-            </button>
-          </div>
+          ) : (
+            ""
+          )}
         </div>
+        {checkOutMsg ? (
+          <div
+            onClick={() => {
+              setCheckOutMsg(!checkOutMsg);
+            }}
+            className="bg-black/40 w-full h-full min-h-[100vh] absolute top-0 left-0 flex justify-center items-center z-[100]">
+            <div className="w-[200px] h-[150px] px-2 py-2 flex flex-col bg-white rounded-md shadow-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border-t-8 border-primary-200">
+              <div className="flex justify-end">
+                <MdClose
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setCheckOutMsg(!checkOutMsg);
+                    setCart(!cart);
+                  }}
+                  size={20}
+                />
+              </div>
+              <div className="w-full h-full flex justify-center items-center">
+                <p className="text-center uppercase font-bold text-slate-800">
+                  Check out Successful!
+                </p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
