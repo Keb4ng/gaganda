@@ -9,10 +9,12 @@ import { Link } from "react-router-dom";
 import ItemListing from "../components/ListingProps/ItemListing";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { MdClose } from "react-icons/md";
 
 const Product = () => {
   let { id } = useParams();
-  const { items, dataStatus } = useApiContext();
+  const { items, dataStatus, handleAddtoCart, productMsg, setProductMsg } =
+    useApiContext();
   const product = items.find((product) => String(product.id) === id);
 
   function NextArrow(props) {
@@ -82,7 +84,7 @@ const Product = () => {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto mt-[94px]">
+    <div className="max-w-[1200px] mx-auto mt-[94px] relative">
       <div className="w-full mx-auto min-h-[80vh] h-auto grid grid-cols-1 md:grid-cols-2 gap-5 px-2 my-5">
         <div className="w-full h-auto flex justify-center items-center">
           <img
@@ -105,7 +107,9 @@ const Product = () => {
               {product?.description}
             </p>
             <div className="flex justify-center md:justify-normal w-auto gap-5">
-              <button className="bg-primary-200 text-[14px] w-[290px] rounded-md text-white px-2 py-3">
+              <button
+                onClick={() => handleAddtoCart(product.id)}
+                className="bg-primary-200 text-[14px] w-[290px] rounded-md text-white px-2 py-3 hover:bg-white hover:text-primary-200 duration-200 border-2 hover:border-primary-200">
                 Add To Cart
               </button>
               <button className="text-gray-500">
@@ -135,6 +139,7 @@ const Product = () => {
                         itemPrice={product.price}
                         itemPriceSign={product.price_sign}
                         productType={product.product_type}
+                        itemId={product.id}
                       />
                     </Link>
                   );
@@ -144,6 +149,28 @@ const Product = () => {
           "Loading..."
         )}
       </div>
+      {productMsg ? (
+        <div
+          onClick={() => setProductMsg(!productMsg)}
+          className="fixed top-0 left-0 w-full min-h-[100vh] bg-black/25 z-[100]">
+          <div className="w-[200px] h-[150px] px-2 py-2 flex flex-col bg-white rounded-md shadow-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border-t-8 border-primary-200">
+            <div className="flex justify-end">
+              <MdClose
+                className="cursor-pointer"
+                onClick={() => setProductMsg(!productMsg)}
+                size={20}
+              />
+            </div>
+            <div className="w-full h-full flex justify-center items-center">
+              <p className="text-center uppercase font-bold text-slate-800">
+                Item added to Cart!
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

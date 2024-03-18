@@ -68,6 +68,7 @@ const MainDisplay = () => {
                   itemBrand={product.brand}
                   itemPrice={product.price}
                   itemPriceSign={product.price_sign}
+                  itemId={product.id}
                 />
               </Link>
             );

@@ -4,6 +4,7 @@ import { getData } from "../../components/ApiConfig/MakeUpApi";
 import { useNavigate } from "react-router-dom";
 
 export const ApiContext = createContext();
+
 export const ContextApiProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
@@ -11,8 +12,38 @@ export const ContextApiProvider = ({ children }) => {
   const [brandFilter, setBrandFilter] = useState([]);
   const [searchData, setSearchData] = useState("");
   const [cart, setCart] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [productMsg, setProductMsg] = useState(false);
   const navigate = useNavigate();
+
+  // cart functions
+
+  const getDefaultCart = () => {
+    let cart = {};
+    for (let i = 1; i < items.length + 1; i++) {
+      cart[i] = 0;
+    }
+    return cart;
+  };
+
+  const [cartItems, setCartItems] = useState(getDefaultCart());
+
+  const addToCart = (itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+    console.log(cartItems);
+  };
+
+  const removeFromCart = (itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  };
+
+  const handleAddtoCart = (itemId) => {
+    const count = cartItems[itemId] || 0;
+    setCartItems((prev) => ({ ...prev, [itemId]: count + 1 }));
+    setProductMsg(!productMsg);
+  };
+  // query / other buttons functions
+
   const {
     status: dataStatus,
     error,
@@ -115,6 +146,12 @@ export const ContextApiProvider = ({ children }) => {
         sortPriceDesc,
         loggedIn,
         setLoggedIn,
+        cartItems,
+        addToCart,
+        removeFromCart,
+        handleAddtoCart,
+        productMsg,
+        setProductMsg,
       }}>
       {children}
     </ApiContext.Provider>

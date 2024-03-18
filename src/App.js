@@ -9,6 +9,7 @@ import { ContextApiProvider } from "./context/DataContext/ContextApi";
 import Product from "./pages/Product";
 import Collections from "./pages/Collections";
 import LoginSignup from "./pages/Login-Signup";
+import Account from "./pages/Account";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/login-signup" element={<LoginSignup />} />
             <Route path="/collections" element={<Collections />} />
+            <Route path="/account" element={<Account />} />
             <Route path="/product/:id" element={<Product />} />
           </Routes>
           <Footer />

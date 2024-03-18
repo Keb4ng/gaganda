@@ -9,7 +9,7 @@ const ItemListing = ({
 }) => {
   return (
     <>
-      <div className="bg-white shadow-md w-full h-full flex flex-col text-[16px]">
+      <div className="bg-white shadow-md w-full h-full flex flex-col text-[16px] max-w-[250px] md:max-w-[300px] mx-auto">
         <div className="w-full min-h-[270px] rounded-t-lg">
           {itemImg ? (
             <img
@@ -35,7 +35,7 @@ const ItemListing = ({
             {itemPrice}
           </p>
           <button className="border-2 border-slate-950 rounded-lg hover:bg-slate-950 duration-300 hover:text-white h-[40px]">
-            Add To bag
+            View Item
           </button>
         </div>
       </div>

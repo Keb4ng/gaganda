@@ -16,7 +16,7 @@ const Banner = () => {
             Great gift for yourselft and love ones
           </p>
           <Link to="/shop">
-            <button className="bg-primary-200 w-[240px] block mx-auto md:mx-[unset] h-[40px] rounded-md text-white mt-6">
+            <button className="bg-primary-200 w-[240px] block mx-auto md:mx-[unset] h-[40px] rounded-md text-white mt-6 hover:bg-white hover:text-primary-200 duration-300">
               Shop Now
             </button>
           </Link>

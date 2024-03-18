@@ -27,19 +27,23 @@ const Header = () => {
         </Link>
         <ul className="flex gap-5">
           <Link to="/shop">
-            <li>SHOP ALL</li>
+            <li className="hover:text-primary-200 duration-300">SHOP ALL</li>
           </Link>
           <Link to="/collections">
-            <li>COLLECTION</li>
+            <li className="hover:text-primary-200 duration-300">COLLECTION</li>
           </Link>
           <Link to="/about">
-            <li>ABOUT US</li>
+            <li className="hover:text-primary-200 duration-300">ABOUT US</li>
           </Link>
           {loggedIn ? (
-            <li>LOG OUT</li>
+            <li className="hover:text-primary-200 duration-300 cursor-pointer">
+              LOG OUT
+            </li>
           ) : (
             <Link to="/login-signup">
-              <li>LOGIN-SIGNUP</li>
+              <li className="hover:text-primary-200 duration-300">
+                LOGIN-SIGNUP
+              </li>
             </Link>
           )}
         </ul>
@@ -47,25 +51,27 @@ const Header = () => {
           {dataStatus === "success" ? (
             <li
               onClick={() => setSearch()}
-              className="flex flex-col items-center cursor-pointer">
+              className="flex flex-col items-center cursor-pointer hover:text-primary-200 duration-300">
               <HiMagnifyingGlass size={20} />
               <span className="text-[14px]">SEARCH</span>
             </li>
           ) : (
-            <li className="flex flex-col items-center cursor-wait">
+            <li className="flex flex-col items-center cursor-wait hover:text-primary-200 duration-300">
               <HiMagnifyingGlass size={20} />
               <span className="text-[14px]">SEARCH</span>
             </li>
           )}
           {loggedIn ? (
             <>
-              <li className="flex flex-col items-center">
-                <IoPersonOutline size={20} />
-                <span className="text-[14px]">ACCOUNT</span>
-              </li>
+              <Link to="/account">
+                <li className="flex flex-col items-center hover:text-primary-200 duration-300">
+                  <IoPersonOutline size={20} />
+                  <span className="text-[14px]">ACCOUNT</span>
+                </li>
+              </Link>
               <li
                 onClick={() => setCart(!cart)}
-                className="flex flex-col items-center cursor-pointer">
+                className="flex flex-col items-center cursor-pointer hover:text-primary-200 duration-300">
                 <SlBag size={20} />
                 <span className="text-[14px]">CART</span>
               </li>
@@ -80,18 +86,18 @@ const Header = () => {
           <div className="flex flex-row w-full items-center h-auto px-2 py-3 ">
             <input
               onChange={handleSearch}
-              className="outline-none w-full h-auto text-slate-950"
+              className="outline-none w-full h-auto text-slate-950 hover:text-primary-200 duration-300"
               type="text"
               placeholder="Enter Search..."
             />
             <div className="flex flex-row gap-2">
               <HiMiniMagnifyingGlass
-                className="cursor-pointer"
+                className="cursor-pointer hover:text-primary-200 duration-300"
                 size={25}
                 onClick={searchButton}
               />
               <IoMdClose
-                className="cursor-pointer"
+                className="cursor-pointer hover:text-primary-200 duration-300"
                 onClick={() => setSearch()}
                 size={25}
               />
@@ -133,12 +139,14 @@ const Header = () => {
                 <span>SEARCH</span>
               </span>
             </li>
-            <li
-              onClick={() => setMobileMenu(!mobileMenu)}
-              className="flex items-center gap-3 py-3">
-              <IoPersonOutline size={23} />
-              <span>ACCOUNT</span>
-            </li>
+            <Link to="/account">
+              <li
+                onClick={() => setMobileMenu(!mobileMenu)}
+                className="flex items-center gap-3 py-3">
+                <IoPersonOutline size={23} />
+                <span>ACCOUNT</span>
+              </li>
+            </Link>
             <Link to="/shop">
               <li
                 onClick={() => setMobileMenu(!mobileMenu)}

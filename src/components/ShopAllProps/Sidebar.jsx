@@ -11,11 +11,11 @@ const Sidebar = () => {
   } = useApiContext();
 
   return (
-    <div className="w-[300px] hidden lg:flex flex-col gap-3 bg-white h-[max-content] p-3 shadow-md rounded-lg">
+    <div className="w-full md:w-[300px] lg:flex flex-col gap-5 bg-white h-[max-content] p-3 shadow-md rounded-lg">
       <h1 className="font-bold text-xl">FILTERS</h1>
       <select
         onChange={(e) => handleProductFilter(e.target.value)}
-        className="py-3 border-b-2 border-gray-200">
+        className="py-3 border-b-2 border-gray-200 w-[50%] md:w-full">
         <option value="">Product Type</option>
         {productType.map((product, index) => {
           return (
@@ -27,7 +27,7 @@ const Sidebar = () => {
       </select>
       <select
         onChange={(e) => handleBrandFilter(e.target.value)}
-        className="py-3 border-b-2 border-gray-200">
+        className="py-3 border-b-2 border-gray-200 w-[50%] md:w-full">
         <option value="">Brand</option>
         {brandType.map((brand, index) => {
           return (
@@ -39,7 +39,7 @@ const Sidebar = () => {
       </select>
       <button
         onClick={handleFilter}
-        className="text-slate-950 border-2 border-slate-950 w-full py-3">
+        className="text-slate-950 border-2 border-slate-950 w-full py-3 mt-5">
         Apply
       </button>
     </div>
