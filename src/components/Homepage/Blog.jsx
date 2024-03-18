@@ -5,9 +5,9 @@ import blog2 from "../../media/blog2.png";
 
 const Blog = () => {
   return (
-    <div className="max-w-[1200px] mx-auto px-2 my-5 flex flex-col gap-2">
+    <div className="max-w-[1200px] mx-auto px-2 my-5 flex flex-col gap-2 [&>*:nth-child(even)]:md:flex-row-reverse">
       <BlogItem
-        title={" Blossom Glow Kit"}
+        title={"Gaganda Glow Kit"}
         desc={`Reveal your skin's natural glow with our Lotus Glow Kit. Nourishing
           body and face creams with lotus extract provide deep hydration and
           rejuvenation. Suitable for all skin types. Vegan, cruelty-free,

@@ -6,22 +6,30 @@ const ItemListing = ({
   itemBrand,
   itemPrice,
   itemPriceSign,
-  productType,
 }) => {
   return (
     <>
-      <div className="bg-white shadow-md w-full h-full flex flex-col text-[16px] ">
+      <div className="bg-white shadow-md w-full h-full flex flex-col text-[16px]">
         <div className="w-full min-h-[270px] rounded-t-lg">
-          <img
-            className="w-full h-[300px] object-cover rounded-t-lg"
-            src={itemImg}
-            alt=""
-          />
+          {itemImg ? (
+            <img
+              className="w-full h-[300px] object-cover rounded-t-lg"
+              src={itemImg}
+              alt=""
+            />
+          ) : (
+            <img
+              className="w-full h-[300px] object-cover rounded-t-lg"
+              src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-512.png"
+              alt="Missing Img"
+            />
+          )}
         </div>
         <div className="flex flex-col px-4 py-5 gap-3">
-          <p className="font-bold text-slate-950">{itemName}</p>
+          <p className="font-bold text-slate-950 overflow-hidden text-ellipsis whitespace-nowrap">
+            {itemName}
+          </p>
           <p className="text-gray-400">{itemBrand}</p>
-          <p className="text-gray-400">{productType}</p>
           <p className="text-slate-950">
             <span>{itemPriceSign}</span>
             {itemPrice}

@@ -13,7 +13,7 @@ import { PiMinusBold } from "react-icons/pi";
 const Header = () => {
   const [searchModal, setSearchModal] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const { handleSearch, searchButton, dataStatus, cart, setCart } =
+  const { handleSearch, searchButton, dataStatus, cart, setCart, loggedIn } =
     useApiContext();
 
   const setSearch = () => {
@@ -29,10 +29,19 @@ const Header = () => {
           <Link to="/shop">
             <li>SHOP ALL</li>
           </Link>
-          <li>COLLECTION</li>
+          <Link to="/collections">
+            <li>COLLECTION</li>
+          </Link>
           <Link to="/about">
             <li>ABOUT US</li>
           </Link>
+          {loggedIn ? (
+            <li>LOG OUT</li>
+          ) : (
+            <Link to="/login-signup">
+              <li>LOGIN-SIGNUP</li>
+            </Link>
+          )}
         </ul>
         <ul className="flex justify-around gap-5">
           {dataStatus === "success" ? (
@@ -48,17 +57,22 @@ const Header = () => {
               <span className="text-[14px]">SEARCH</span>
             </li>
           )}
-
-          <li className="flex flex-col items-center">
-            <IoPersonOutline size={20} />
-            <span className="text-[14px]">ACCOUNT</span>
-          </li>
-          <li
-            onClick={() => setCart(!cart)}
-            className="flex flex-col items-center cursor-pointer">
-            <SlBag size={20} />
-            <span className="text-[14px]">CART</span>
-          </li>
+          {loggedIn ? (
+            <>
+              <li className="flex flex-col items-center">
+                <IoPersonOutline size={20} />
+                <span className="text-[14px]">ACCOUNT</span>
+              </li>
+              <li
+                onClick={() => setCart(!cart)}
+                className="flex flex-col items-center cursor-pointer">
+                <SlBag size={20} />
+                <span className="text-[14px]">CART</span>
+              </li>
+            </>
+          ) : (
+            ""
+          )}
         </ul>
       </div>
       {searchModal ? (
@@ -76,7 +90,11 @@ const Header = () => {
                 size={25}
                 onClick={searchButton}
               />
-              <IoMdClose onClick={() => setSearch()} size={25} />
+              <IoMdClose
+                className="cursor-pointer"
+                onClick={() => setSearch()}
+                size={25}
+              />
             </div>
           </div>
         </div>
@@ -129,18 +147,30 @@ const Header = () => {
                 SHOP ALL
               </li>
             </Link>
-            <li
-              onClick={() => setMobileMenu(!mobileMenu)}
-              className="flex items-center gap-3 py-3">
-              <PiMinusBold size={25} />
-              COLLECTION
-            </li>
-            <li
-              onClick={() => setMobileMenu(!mobileMenu)}
-              className="flex items-center gap-3 py-3">
-              <PiMinusBold size={25} />
-              ABOUT US
-            </li>
+            <Link to="/collections">
+              <li
+                onClick={() => setMobileMenu(!mobileMenu)}
+                className="flex items-center gap-3 py-3">
+                <PiMinusBold size={25} />
+                COLLECTION
+              </li>
+            </Link>
+            <Link to="/login-signup">
+              <li
+                onClick={() => setMobileMenu(!mobileMenu)}
+                className="flex items-center gap-3 py-3">
+                <PiMinusBold size={25} />
+                LOGIN-SIGNUP
+              </li>
+            </Link>
+            <Link to="/about">
+              <li
+                onClick={() => setMobileMenu(!mobileMenu)}
+                className="flex items-center gap-3 py-3">
+                <PiMinusBold size={25} />
+                ABOUT US
+              </li>
+            </Link>
           </ul>
         </div>
       ) : (

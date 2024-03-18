@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 import { LuLoader2 } from "react-icons/lu";
 
 const MainDisplay = () => {
-  const { filteredItems, sortAsc, sortDesc, isLoading } = useApiContext();
+  const { filteredItems, sortAsc, sortPriceAsc, sortPriceDesc, isLoading } =
+    useApiContext();
   const [sortOptions, setSortOptions] = useState(false);
+
   return (
     <div className="max-w-[900px] w-full h-auto">
       <div className="flex flex-row justify-between">
-        <p className="text-gray-400">46 Products</p>
+        <p className="text-gray-400">{filteredItems.length} Products</p>
         <div className="flex flex-row gap-3 relative">
           <p className="text-gray-400">SORT BY:</p>
           <button
@@ -20,12 +22,30 @@ const MainDisplay = () => {
             A-Z <MdOutlineKeyboardArrowDown />
           </button>
           {sortOptions ? (
-            <ul className="absolute w-[150px] h-auto top-5 bg-white px-2 py-2 rounded-md shadow-md">
-              <li className="cursor-pointer" onClick={sortAsc}>
-                A-Z
+            <ul className="absolute w-[150px] h-auto top-5 right-[10px] md:right-0 bg-white px-2 py-2 rounded-md shadow-md">
+              <li
+                className="cursor-pointer"
+                onClick={() => {
+                  setSortOptions(!sortOptions);
+                  sortAsc();
+                }}>
+                From A-Z
               </li>
-              <li className="cursor-pointer" onClick={sortDesc}>
-                Z-A
+              <li
+                className="cursor-pointer"
+                onClick={() => {
+                  setSortOptions(!sortOptions);
+                  sortPriceAsc();
+                }}>
+                Price Lowest
+              </li>{" "}
+              <li
+                className="cursor-pointer"
+                onClick={() => {
+                  setSortOptions(!sortOptions);
+                  sortPriceDesc();
+                }}>
+                Price Highest
               </li>
             </ul>
           ) : (
@@ -46,7 +66,6 @@ const MainDisplay = () => {
                   itemImg={product.api_featured_image}
                   itemName={product.name}
                   itemBrand={product.brand}
-                  productType={product.product_type}
                   itemPrice={product.price}
                   itemPriceSign={product.price_sign}
                 />

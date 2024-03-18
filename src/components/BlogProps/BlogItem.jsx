@@ -4,7 +4,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 const BlogItem = ({ title, desc, img }) => {
   return (
     <div className="w-full h-auto items center flex flex-col-reverse md:flex-row gap-2">
-      <div className="flex flex-col w-full md:w-[50%] justify-center">
+      <div className="flex flex-col px-0 md:px-5 w-full md:w-[50%] justify-center bg-white rounded-md shadow-md">
         <p className="text-[20px] font-bold md:text-[36px] text-slate-950">
           {title}
         </p>

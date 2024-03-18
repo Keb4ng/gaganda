@@ -86,13 +86,13 @@ const Product = () => {
       <div className="w-full mx-auto min-h-[80vh] h-auto grid grid-cols-1 md:grid-cols-2 gap-5 px-2 my-5">
         <div className="w-full h-auto flex justify-center items-center">
           <img
-            className="w-full h-full object-contain max-h-[600px]"
+            className="w-full max-w-[400px]  h-full object-contain max-h-[600px] rounded-md shadow-md"
             src={product?.api_featured_image}
             alt=""
           />
         </div>
         <div className="flex flex-col gap-3 justify-center">
-          <div>
+          <div className="bg-white px-3 py-6 shadow-md rounded-md">
             <p className="text-[22px] font-bold text-slate-950">
               {product?.name}
             </p>
@@ -104,14 +104,14 @@ const Product = () => {
             <p className="text-[14px] text-gray-500 my-5">
               {product?.description}
             </p>
-          </div>
-          <div className="flex justify-center md:justify-normal w-auto gap-5">
-            <button className="bg-primary-200 text-[14px] w-[290px] rounded-md text-white px-2 py-3">
-              Add To Cart
-            </button>
-            <button className="text-gray-500">
-              <TiHeartFullOutline size={25} />
-            </button>
+            <div className="flex justify-center md:justify-normal w-auto gap-5">
+              <button className="bg-primary-200 text-[14px] w-[290px] rounded-md text-white px-2 py-3">
+                Add To Cart
+              </button>
+              <button className="text-gray-500">
+                <TiHeartFullOutline size={25} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

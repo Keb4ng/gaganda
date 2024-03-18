@@ -7,6 +7,8 @@ import AboutUs from "./pages/AboutUs";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ContextApiProvider } from "./context/DataContext/ContextApi";
 import Product from "./pages/Product";
+import Collections from "./pages/Collections";
+import LoginSignup from "./pages/Login-Signup";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
             <Route exact path="/" element={<Homepage />} />
             <Route path="/shop" element={<ShopAll />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/login-signup" element={<LoginSignup />} />
+            <Route path="/collections" element={<Collections />} />
             <Route path="/product/:id" element={<Product />} />
           </Routes>
           <Footer />

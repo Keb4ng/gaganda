@@ -11,6 +11,7 @@ export const ContextApiProvider = ({ children }) => {
   const [brandFilter, setBrandFilter] = useState([]);
   const [searchData, setSearchData] = useState("");
   const [cart, setCart] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
   const {
     status: dataStatus,
@@ -71,15 +72,16 @@ export const ContextApiProvider = ({ children }) => {
       a.name - b.name ? 1 : -1
     );
     setFilteredItems(sortedItems);
-    console.log(sortedItems);
   };
 
-  const sortDesc = () => {
-    const sortedItems = filteredItems.sort((a, b) =>
-      a.price - b.price ? 1 : -1
-    );
+  const sortPriceAsc = () => {
+    const sortedItems = filteredItems.sort((a, b) => a.price - b.price);
     setFilteredItems(sortedItems);
-    console.log(sortedItems);
+  };
+
+  const sortPriceDesc = () => {
+    const sortedItems = filteredItems.sort((a, b) => b.price - a.price);
+    setFilteredItems(sortedItems);
   };
 
   useEffect(() => {
@@ -109,7 +111,10 @@ export const ContextApiProvider = ({ children }) => {
         cart,
         setCart,
         sortAsc,
-        sortDesc,
+        sortPriceAsc,
+        sortPriceDesc,
+        loggedIn,
+        setLoggedIn,
       }}>
       {children}
     </ApiContext.Provider>

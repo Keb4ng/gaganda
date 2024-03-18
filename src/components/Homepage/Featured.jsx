@@ -86,7 +86,7 @@ const Featured = () => {
           <LuLoader2 className="animate-spin" size={50} />
         </div>
       ) : (
-        <Slider {...settings}>
+        <Slider {...settings} className="gap-3">
           {items
             .filter((product) => {
               return product.brand === "marienatie";
@@ -101,7 +101,6 @@ const Featured = () => {
                     itemBrand={product.brand}
                     itemPrice={product.price}
                     itemPriceSign={product.price_sign}
-                    productType={product.product_type}
                   />
                 </Link>
               );
