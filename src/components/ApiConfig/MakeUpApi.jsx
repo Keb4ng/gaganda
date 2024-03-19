@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const MakeUpApi = axios.create({
-  baseURL: "http://makeup-api.herokuapp.com/api/v1",
+  baseURL: "https://makeup-api.herokuapp.com/api/v1",
 });
 
 export const getData = async () => {
