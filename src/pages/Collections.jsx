@@ -93,7 +93,7 @@ const Collections = () => {
       </div>
 
       <h1 className="text-xl text-slate-950 text-center my-5 font-bold">
-        Colourpop
+        Glossier
       </h1>
       {isLoading ? (
         <div className="w-full h-auto flex items-center justify-center">
@@ -103,7 +103,7 @@ const Collections = () => {
         <Slider {...settings} className="gap-3">
           {items
             .filter((product) => {
-              return product.brand === "colourpop";
+              return product.brand === "glossier";
             })
             .slice(0, 12)
             .map((product) => {
@@ -149,7 +149,7 @@ const Collections = () => {
         </Slider>
       )}
       <h1 className="text-xl text-slate-950 text-center my-5 font-bold">
-        Dior
+        Colourpop
       </h1>
       {isLoading ? (
         <div className="w-full h-auto flex items-center justify-center">
@@ -159,7 +159,7 @@ const Collections = () => {
         <Slider {...settings} className="gap-3">
           {items
             .filter((product) => {
-              return product.brand === "dior";
+              return product.brand === "colourpop";
             })
             .slice(0, 12)
             .map((product) => {

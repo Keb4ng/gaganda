@@ -23,7 +23,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/login-signup" element={<LoginSignup />} />
             <Route path="/collections" element={<Collections />} />
-            <Route path="/account" element={<Account />} />
+            <Route private path="/account" element={<Account />} />
             <Route path="/product/:id" element={<Product />} />
           </Routes>
           <Footer />

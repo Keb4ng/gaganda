@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useApiContext } from "../context/DataContext/ContextApi";
 import { TiHeartFullOutline } from "react-icons/ti";
@@ -13,9 +13,16 @@ import { MdClose } from "react-icons/md";
 
 const Product = () => {
   let { id } = useParams();
-  const { items, dataStatus, handleAddtoCart, productMsg, setProductMsg } =
-    useApiContext();
+  const {
+    items,
+    dataStatus,
+    handleAddtoCart,
+    productMsg,
+    setProductMsg,
+    loggedIn,
+  } = useApiContext();
   const product = items.find((product) => String(product.id) === id);
+  const [heart, setHeart] = useState(false);
 
   function NextArrow(props) {
     const { className, style, onClick } = props;
@@ -106,16 +113,33 @@ const Product = () => {
             <p className="text-[14px] text-gray-500 my-5">
               {product?.description}
             </p>
-            <div className="flex justify-center md:justify-normal w-auto gap-5">
-              <button
-                onClick={() => handleAddtoCart(product.id)}
-                className="bg-primary-200 text-[14px] w-[290px] rounded-md text-white px-2 py-3 hover:bg-white hover:text-primary-200 duration-200 border-2 hover:border-primary-200">
-                Add To Cart
-              </button>
-              <button className="text-gray-500">
-                <TiHeartFullOutline size={25} />
-              </button>
-            </div>
+            {loggedIn ? (
+              <div className="flex justify-center md:justify-normal w-auto gap-5">
+                <button
+                  onClick={() => handleAddtoCart(product.id)}
+                  className="bg-primary-200 text-[14px] w-[290px] rounded-md text-white px-2 py-3 hover:bg-white hover:text-primary-200 duration-200 border-2 hover:border-primary-200">
+                  Add To Cart
+                </button>
+                <button
+                  onClick={() => setHeart(!heart)}
+                  className="text-gray-500">
+                  {heart ? (
+                    <TiHeartFullOutline className="text-red-400" size={25} />
+                  ) : (
+                    <TiHeartFullOutline size={25} />
+                  )}
+                </button>
+              </div>
+            ) : (
+              <div className="flex justify-center md:justify-normal w-auto gap-5">
+                <button className="bg-primary-200 text-[14px] cursor-not-allowed w-[290px] rounded-md text-white px-2 py-3 hover:bg-white hover:text-primary-200 duration-200 border-2 hover:border-primary-200">
+                  Add To Cart
+                </button>
+                <button className="text-gray-500">
+                  <TiHeartFullOutline size={25} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -12,7 +12,8 @@ export const ContextApiProvider = ({ children }) => {
   const [brandFilter, setBrandFilter] = useState([]);
   const [searchData, setSearchData] = useState("");
   const [cart, setCart] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState([]);
   const [productMsg, setProductMsg] = useState(false);
   const [checkOutMsg, setCheckOutMsg] = useState(false);
   const navigate = useNavigate();
@@ -31,7 +32,6 @@ export const ContextApiProvider = ({ children }) => {
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    console.log(cartItems);
   };
 
   const removeFromCart = (itemId) => {
@@ -162,6 +162,8 @@ export const ContextApiProvider = ({ children }) => {
         checkOut,
         checkOutMsg,
         setCheckOutMsg,
+        user,
+        setUser,
       }}>
       {children}
     </ApiContext.Provider>

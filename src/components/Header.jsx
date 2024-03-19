@@ -9,16 +9,32 @@ import { useApiContext } from "../context/DataContext/ContextApi";
 import Cart from "./CartComponents/Cart";
 import { IoMdClose } from "react-icons/io";
 import { PiMinusBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [searchModal, setSearchModal] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const { handleSearch, searchButton, dataStatus, cart, setCart, loggedIn } =
-    useApiContext();
+  const navigate = useNavigate();
+  const {
+    handleSearch,
+    searchButton,
+    dataStatus,
+    cart,
+    setCart,
+    loggedIn,
+    setLoggedIn,
+  } = useApiContext();
 
   const setSearch = () => {
     setSearchModal(!searchModal);
   };
+
+  const logOut = () => {
+    localStorage.removeItem("data.email");
+    setLoggedIn(!loggedIn);
+    navigate("/");
+  };
+
   return (
     <div className="fixed top-0 w-full z-50 shadow-md bg-white">
       <div className="max-w-[1200px] px-2 py-5 mx-auto h-auto hidden md:flex flex-row justify-between items-center">
@@ -36,7 +52,9 @@ const Header = () => {
             <li className="hover:text-primary-200 duration-300">ABOUT US</li>
           </Link>
           {loggedIn ? (
-            <li className="hover:text-primary-200 duration-300 cursor-pointer">
+            <li
+              onClick={logOut}
+              className="hover:text-primary-200 duration-300 cursor-pointer">
               LOG OUT
             </li>
           ) : (

@@ -49,6 +49,7 @@ const Cart = () => {
                   />
                 );
               }
+              return null;
             })}
           </div>
           {totalAmount ? (
@@ -70,6 +71,7 @@ const Cart = () => {
           <div
             onClick={() => {
               setCheckOutMsg(!checkOutMsg);
+              setCart(false);
             }}
             className="bg-black/40 w-full h-full min-h-[100vh] absolute top-0 left-0 flex justify-center items-center z-[100]">
             <div className="w-[200px] h-[150px] px-2 py-2 flex flex-col bg-white rounded-md shadow-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] border-t-8 border-primary-200">
@@ -78,7 +80,7 @@ const Cart = () => {
                   className="cursor-pointer"
                   onClick={() => {
                     setCheckOutMsg(!checkOutMsg);
-                    setCart(!cart);
+                    setCart(false);
                   }}
                   size={20}
                 />
